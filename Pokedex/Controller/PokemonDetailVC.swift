@@ -24,13 +24,24 @@ class PokemonDetailVC: UIViewController {
     @IBOutlet weak var nextEvoImg: UIImageView!
     @IBOutlet weak var evoLabel: UILabel!
     
-    
     var pokemon: Pokemon!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         nameLabel.text = pokemon.name
+        pokemon.downloadPokemonDetails {
+            self.updateInfos()
+        }
+    }
+    
+    func updateInfos() {
+        typeLabel.text = pokemon.type
+        defenseLabel.text = pokemon.defense
+        heightLabel.text = pokemon.height
+        weightLabel.text = pokemon.weight
+        baseAttackLabel.text = pokemon.attack
+        pokedexLabel.text = String(describing: pokemon.pokedexId)
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
