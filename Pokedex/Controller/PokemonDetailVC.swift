@@ -28,7 +28,7 @@ class PokemonDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         nameLabel.text = pokemon.name
         pokemon.downloadPokemonDetails { (error) in
             if error == nil {
@@ -44,6 +44,10 @@ class PokemonDetailVC: UIViewController {
         weightLabel.text = pokemon.weight
         baseAttackLabel.text = pokemon.attack
         pokedexLabel.text = String(describing: pokemon.pokedexId)
+        
+        if let img = UIImage(named: "\(pokemon.pokedexId)") {
+            mainImg.image = img
+        }
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
