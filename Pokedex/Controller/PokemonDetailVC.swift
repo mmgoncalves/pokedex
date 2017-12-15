@@ -30,6 +30,11 @@ class PokemonDetailVC: UIViewController {
         super.viewDidLoad()
         
         nameLabel.text = pokemon.name
+        if let img = UIImage(named: "\(pokemon.pokedexId)") {
+            mainImg.image = img
+            currentEvoImg.image = img
+        }
+        
         pokemon.downloadPokemonDetails { (error) in
             if error == nil {
                 self.updateInfos()
@@ -44,10 +49,6 @@ class PokemonDetailVC: UIViewController {
         weightLabel.text = pokemon.weight
         baseAttackLabel.text = pokemon.attack
         pokedexLabel.text = String(describing: pokemon.pokedexId)
-        
-        if let img = UIImage(named: "\(pokemon.pokedexId)") {
-            mainImg.image = img
-        }
     }
 
     @IBAction func backButtonPressed(_ sender: Any) {
