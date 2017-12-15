@@ -30,8 +30,10 @@ class PokemonDetailVC: UIViewController {
         super.viewDidLoad()
 
         nameLabel.text = pokemon.name
-        pokemon.downloadPokemonDetails {
-            self.updateInfos()
+        pokemon.downloadPokemonDetails { (error) in
+            if error == nil {
+                self.updateInfos()
+            }
         }
     }
     

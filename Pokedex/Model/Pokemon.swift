@@ -30,6 +30,12 @@ class Pokemon {
     
     func downloadPokemonDetails(completed: @escaping DownloadComplete) {
         Alamofire.request(_pokemonURL, method: .get).responseJSON { (response) in
+            
+            if let error = response.result.error {
+                completed(error)
+                return
+            }
+            
             if let data = response.data {
                 
                 do {
@@ -57,7 +63,7 @@ class Pokemon {
                         self._attack = String(describing: attack.base_stat ?? 0)
                     }
                     
-                    completed()
+                    completed(nil)
                     
                 } catch {
                     print("Error to parse json to object: \(error.localizedDescription) ")
